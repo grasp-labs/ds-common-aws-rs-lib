@@ -6,8 +6,8 @@ pub mod error;
 
 use aws_sdk_sqs::Client;
 
+use crate::error::{Error, Result};
 use crate::sqs::error::{map_sqs_err, SqsError};
-use crate::error::{Result, Error};
 
 /// SQS service for interacting with AWS SQS
 ///
@@ -64,7 +64,8 @@ impl SqsService {
     /// * [`SqsError::Build`] - If the request fails to build.
     /// * [`SqsError::InvalidResponse`] - If the queue URL is not found.
     pub async fn get_queue(&self, name: &str) -> Result<String> {
-        let response = self.client
+        let response = self
+            .client
             .get_queue_url()
             .queue_name(name)
             .send()
@@ -97,7 +98,8 @@ impl SqsService {
     /// * [`SqsError::Build`] - If the request fails to build.
     /// * [`SqsError::InvalidResponse`] - If the message ID is not found.
     pub async fn send_message(&self, queue_url: &str, body: &str, delay_seconds: Option<i32>) -> Result<String> {
-        let response = self.client
+        let response = self
+            .client
             .send_message()
             .queue_url(queue_url)
             .message_body(body)

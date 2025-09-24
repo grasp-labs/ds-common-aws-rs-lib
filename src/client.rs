@@ -6,7 +6,7 @@
 use aws_config::meta::region::RegionProviderChain;
 use aws_config::SdkConfig;
 
-use crate::error::{Result, Error};
+use crate::error::{Error, Result};
 
 /// Main AWS client that manages shared configuration and clients
 ///

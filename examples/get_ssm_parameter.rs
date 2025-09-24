@@ -1,7 +1,6 @@
 use ds_common_aws_rs_lib::client::AwsClient;
-use ds_common_aws_rs_lib::error::{Result, Error};
+use ds_common_aws_rs_lib::error::{Error, Result};
 use ds_common_aws_rs_lib::ssm::error::SsmError;
-
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {

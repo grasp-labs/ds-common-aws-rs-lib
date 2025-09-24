@@ -13,10 +13,10 @@
 
 use thiserror::Error;
 
-#[cfg(feature = "ssm")]
-use crate::ssm::error::SsmError;
 #[cfg(feature = "sqs")]
 use crate::sqs::error::SqsError;
+#[cfg(feature = "ssm")]
+use crate::ssm::error::SsmError;
 
 /// Unified result type for all operations.
 ///

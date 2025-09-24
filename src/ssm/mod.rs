@@ -4,10 +4,10 @@
 
 pub mod error;
 
-use aws_sdk_ssm::{Client, types::ParameterType};
+use aws_sdk_ssm::{types::ParameterType, Client};
 
-use crate::ssm::error::{SsmError, map_ssm_err};
-use crate::error::{Result, Error};
+use crate::error::{Error, Result};
+use crate::ssm::error::{map_ssm_err, SsmError};
 
 /// SSM service for interacting with AWS Systems Manager
 ///
@@ -64,7 +64,8 @@ impl SsmService {
     /// * [`SsmError::Build`] - If the request fails to build.
     /// * [`SsmError::InvalidResponse`] - If the parameter is not found.
     pub async fn get_parameter(&self, name: &str) -> Result<String> {
-        let response = self.client
+        let response = self
+            .client
             .get_parameter()
             .name(name)
             .with_decryption(true)
@@ -100,7 +101,13 @@ impl SsmService {
     /// * [`SsmError::Timeout`] - If the request times out.
     /// * [`SsmError::Transport`] - If the request fails to dispatch.
     /// * [`SsmError::Build`] - If the request fails to build.
-    pub async fn put_parameter(&self, name: &str, value: &str, parameter_type: ParameterType, overwrite: bool) -> Result<()> {
+    pub async fn put_parameter(
+        &self,
+        name: &str,
+        value: &str,
+        parameter_type: ParameterType,
+        overwrite: bool,
+    ) -> Result<()> {
         self.client
             .put_parameter()
             .name(name)

@@ -48,15 +48,14 @@
 pub mod client;
 pub mod error;
 
-#[cfg(feature = "ssm")]
-pub mod ssm;
 #[cfg(feature = "sqs")]
 pub mod sqs;
-
+#[cfg(feature = "ssm")]
+pub mod ssm;
 
 // Re-export commonly used AWS types for convenience
 pub use aws_config;
-#[cfg(feature = "ssm")]
-pub use aws_sdk_ssm;
 #[cfg(feature = "sqs")]
 pub use aws_sdk_sqs;
+#[cfg(feature = "ssm")]
+pub use aws_sdk_ssm;

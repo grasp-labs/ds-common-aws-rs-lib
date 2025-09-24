@@ -49,16 +49,14 @@ where
     use aws_smithy_runtime_api::client::result::SdkError::*;
     match e {
         ConstructionFailure(_cf) => SsmError::Build,
-        TimeoutError(_te) => SsmError::Timeout {
-            request_id: None,
-        },
+        TimeoutError(_te) => SsmError::Timeout { request_id: None },
         DispatchFailure(_df) => SsmError::Transport {
             request_id: None,
-            source: Box::new(std::io::Error::new(std::io::ErrorKind::Other, "Dispatch failure")),
+            source: Box::new(std::io::Error::other("Dispatch failure")),
         },
-        ResponseError(_re) => SsmError::Service(Box::new(std::io::Error::new(std::io::ErrorKind::Other, "Response error"))),
+        ResponseError(_re) => SsmError::Service(Box::new(std::io::Error::other("Response error"))),
         ServiceError(se) => SsmError::Service(Box::new(se.into_err())),
-        _ => SsmError::Service(Box::new(std::io::Error::new(std::io::ErrorKind::Other, "Unknown error"))),
+        _ => SsmError::Service(Box::new(std::io::Error::other("Unknown error"))),
     }
 }
 

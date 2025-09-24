@@ -21,7 +21,7 @@ async fn test_ssm_client_creation_safety() {
         .await;
 
     let client = SsmClient::new(&config);
-    assert!(!client.config().region().is_none());
+    assert!(client.config().region().is_some());
 }
 
 #[test]

@@ -33,7 +33,7 @@ async fn test_ssm_client_creation_thread_safety() {
         aws_config::defaults(BehaviorVersion::latest())
             .region(Region::new("us-west-2"))
             .load()
-            .await
+            .await,
     );
 
     let handles: Vec<_> = (0..5)
@@ -41,7 +41,7 @@ async fn test_ssm_client_creation_thread_safety() {
             let config = Arc::clone(&config);
             thread::spawn(move || {
                 let client = SsmClient::new(&config);
-                assert!(!client.config().region().is_none());
+                assert!(client.config().region().is_some());
             })
         })
         .collect();
@@ -64,10 +64,7 @@ fn test_region_creation_concurrent() {
         })
         .collect();
 
-    let results: Vec<_> = handles
-        .into_iter()
-        .map(|handle| handle.join().unwrap())
-        .collect();
+    let results: Vec<_> = handles.into_iter().map(|handle| handle.join().unwrap()).collect();
 
     assert_eq!(results.len(), 20);
     for (region, expected) in results {
@@ -77,14 +74,12 @@ fn test_region_creation_concurrent() {
 
 #[test]
 fn test_aws_config_shared_across_threads() {
-    let config = Arc::new(
-        tokio::runtime::Runtime::new().unwrap().block_on(async {
-            aws_config::defaults(BehaviorVersion::latest())
-                .region(Region::new("us-west-2"))
-                .load()
-                .await
-        })
-    );
+    let config = Arc::new(tokio::runtime::Runtime::new().unwrap().block_on(async {
+        aws_config::defaults(BehaviorVersion::latest())
+            .region(Region::new("us-west-2"))
+            .load()
+            .await
+    }));
 
     let handles: Vec<_> = (0..5)
         .map(|_| {
