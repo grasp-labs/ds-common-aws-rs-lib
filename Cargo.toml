@@ -9,7 +9,7 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/grasp-labs/ds-common-aws-rs-lib"
 documentation = "https://docs.rs/ds-common-aws-rs-lib"
 keywords = ["aws", "sdk", "utilities", "ssm", "sqs"]
-categories = ["aws", "utilities"]
+categories = ["api-bindings"]
 
 [features]
 default = ["full"]
