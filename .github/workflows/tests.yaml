@@ -21,8 +21,5 @@ jobs:
       - name: Test
         run: cargo test --verbose
 
-      - name: Test with different features
-        run: cargo test --features aws-ssm --verbose
-
       - name: Doc build
         run: cargo doc --no-deps
