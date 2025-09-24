@@ -1,0 +1,29 @@
+[package]
+name = "ds-common-aws-rs-lib"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.76.0"
+description = "A comprehensive Rust library for AWS services integration, providing high-level abstractions for AWS SDK operations with common utilities and error handling"
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/grasp-labs/ds-common-aws-rs-lib"
+documentation = "https://docs.rs/ds-common-aws-rs-lib"
+keywords = ["aws", "sdk", "utilities", "ssm", "sqs"]
+categories = ["aws", "utilities"]
+
+[features]
+default = ["full"]
+ssm = ["aws-sdk-ssm"]
+sqs = ["aws-sdk-sqs"]
+full = ["ssm", "sqs"]
+
+[dependencies]
+aws-config = "1.8.1"
+aws-sdk-ssm = { version = "1.83.0", optional = true }
+aws-sdk-sqs = { version = "1.39.0", optional = true }
+aws-smithy-runtime-api = "1"
+
+thiserror = "2.0.16"
+
+[dev-dependencies]
+tokio = { version = "1.0", features = ["full"] }
