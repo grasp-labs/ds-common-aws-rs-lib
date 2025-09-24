@@ -36,10 +36,11 @@ jobs:
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
         run: |
-          if cargo publish 2>&1 | grep -q "already exists"; then
+          cargo publish 2>&1 | tee publish_output.log
+          if grep -q "already exists" publish_output.log; then
             echo "Version ${{ github.ref_name }} already exists on crates.io, skipping publish"
           else
-            cargo publish
+            echo "Successfully published version ${{ github.ref_name }} to crates.io"
           fi
 
       - name: Create GitHub Release
