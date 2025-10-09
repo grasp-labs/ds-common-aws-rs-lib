@@ -24,7 +24,7 @@ This crate supports the following features:
 - `ssm` - AWS Systems Manager Parameter Store support (enabled by default)
 - `sqs` - AWS Simple Queue Service support
 - `s3` - AWS Simple Storage Service support
-- `full` - Enables all features (equivalent to `ssm` + `sqs`)
+- `full` - Enables all features (equivalent to `ssm` + `sqs` + `s3`)
 
 ## Installation
 
