@@ -6,7 +6,6 @@
 //!
 //! ## Error Hierarchy
 //!
-//! - [`Error`]: Top-level error enum that unifies all module errors
 //! - [`SsmError`]: Errors from SSM operations
 //! - [`SqsError`]: Errors from SQS operations
 //! - [`S3Error`]: Errors from S3 operations
