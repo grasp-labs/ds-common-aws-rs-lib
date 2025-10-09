@@ -8,7 +8,7 @@ readme = "README.md"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/grasp-labs/ds-common-aws-rs-lib"
 documentation = "https://docs.rs/ds-common-aws-rs-lib"
-keywords = ["aws", "sdk", "utilities", "ssm", "sqs", "s3"]
+keywords = ["aws", "sdk", "utilities", "ssm", "sqs"]
 categories = ["api-bindings"]
 
 [features]
