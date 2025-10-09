@@ -34,7 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.0] - 2025-01-15
 
-### Added
+### Added [0.1.0]
 
 - Initial release
 - AWS SDK integration with simplified configuration
@@ -46,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Environment-specific configuration support
 - Comprehensive documentation and examples
 
-### Security
+### Security [0.1.0]
 
 - Memory-safe implementation using Rust's ownership system
 - No unsafe code blocks
@@ -54,7 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Secure AWS credential handling
 - Encrypted parameter retrieval support
 
-### Documentation
+### Documentation [0.1.0]
 
 - Complete API documentation with examples
 - README with quick start guide
@@ -65,9 +65,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## Security Information
+## [0.2.0] - 2025-10-09
 
-Security-related changes will be documented in this changelog. For security vulnerabilities, please see [SECURITY.md](SECURITY.md).
+### Added [0.2.0]
+
+- Added S3 support
+
+### Features [0.2.0]
+
+- **S3 Support** - Simplified S3 operations
+
+### Dependencies [0.2.0]
+
+- `aws-sdk-s3` = "1.67.0" - AWS Simple Storage Service SDK
 
 ## License
 
