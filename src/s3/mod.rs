@@ -46,7 +46,7 @@ impl S3Service {
         }
     }
 
-    /// Fetch an object from S3 and return it as a UTF-8 string.
+    /// Get an S3 object
     ///
     /// # Arguments
     ///
@@ -55,11 +55,14 @@ impl S3Service {
     ///
     /// # Returns
     ///
-    /// The object contents as a `String`.
+    /// The object contents as a `Vec<u8>`.
     ///
     /// # Errors
     ///
-    /// Returns [`S3Error`] variants on client, network, or response failures.
+    /// * [`S3Error::Service`] - If the S3 client fails to create.
+    /// * [`S3Error::Timeout`] - If the request times out.
+    /// * [`S3Error::Transport`] - If the request fails to dispatch.
+    /// * [`S3Error::Build`] - If the request fails to build.
     pub async fn get_object(&self, bucket: &str, key: &str) -> Result<Vec<u8>> {
         let response = self
             .client
@@ -97,7 +100,7 @@ impl S3Service {
     ///
     /// # Returns
     ///
-    /// Returns nothing
+    /// Returns `Ok(())` if the object is put successfully.
     ///
     /// # Errors
     ///
