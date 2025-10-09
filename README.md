@@ -23,7 +23,8 @@ This crate supports the following features:
 
 - `ssm` - AWS Systems Manager Parameter Store support (enabled by default)
 - `sqs` - AWS Simple Queue Service support
-- `full` - Enables all features (equivalent to `ssm` + `sqs`)
+- `s3` - AWS Simple Storage Service support
+- `full` - Enables all features (equivalent to `ssm` + `sqs` + `s3`)
 
 ## Installation
 
@@ -55,12 +56,13 @@ async fn main() -> Result<(), Error> {
     // Get specialized services (very fast, no network calls)
     let ssm = aws.ssm();
     let sqs = aws.sqs();
-
+    let s3 = aws.s3();
     // Use services with shared client
     let parameter = ssm.get_parameter("/myapp/database/url").await?;
     let queue_url = sqs.get_queue("my-queue").await?;
     sqs.send_message(&queue_url, "Hello, world!", None).await?;
     ssm.put_parameter("/myapp/database/url", "my-database-url", ParameterType::String, true).await?;
+    s3.put_object("my-bucket", "my-key", b"test-value".to_vec(), None).await?;
     Ok(())
 }
 ```

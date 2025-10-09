@@ -1,51 +1,73 @@
-use ds_common_aws_rs_lib::aws_config::{BehaviorVersion, Region};
-use ds_common_aws_rs_lib::aws_sdk_ssm::Client as SsmClient;
+use ds_common_aws_rs_lib::client::AwsClient;
 
 #[tokio::test]
-async fn test_aws_config_panic_safety() {
-    // Test that AWS config creation doesn't panic
-    let config = aws_config::defaults(BehaviorVersion::latest())
-        .region(Region::new("us-west-2"))
-        .load()
-        .await;
-
-    assert!(config.region().is_some());
-}
-
-#[tokio::test]
-async fn test_ssm_client_creation_safety() {
-    // Test that SSM client creation doesn't panic
-    let config = aws_config::defaults(BehaviorVersion::latest())
-        .region(Region::new("us-west-2"))
-        .load()
-        .await;
-
-    let client = SsmClient::new(&config);
-    assert!(client.config().region().is_some());
-}
-
-#[test]
-fn test_region_creation_safety() {
-    // Test region creation with various inputs doesn't panic
-    let regions = ["us-east-1", "us-west-2", "eu-north-1", "ap-southeast-1"];
-
-    for region_str in regions {
-        let region = Region::new(region_str);
-        assert_eq!(region.as_ref(), region_str);
+async fn test_aws_client_creation_panic_safety() {
+    // Test that AWS client creation doesn't panic
+    let result = AwsClient::new().await;
+    match result {
+        Ok(client) => {
+            assert!(client.config().region().is_some());
+        }
+        Err(_) => {
+            // It's okay if it fails due to missing credentials, but it shouldn't panic
+            // Test passes if we reach this point without panicking
+        }
     }
 }
 
-#[test]
-fn test_region_creation_with_empty_string() {
-    // Test region creation with empty string doesn't panic
-    let region = Region::new("");
-    assert_eq!(region.as_ref(), "");
+#[tokio::test]
+async fn test_aws_client_with_config_panic_safety() {
+    // Test that AWS client creation with custom config doesn't panic
+    let config = aws_config::defaults(aws_config::BehaviorVersion::latest())
+        .region("us-west-2")
+        .load()
+        .await;
+
+    let client = AwsClient::with_config(config);
+    assert!(client.config().region().is_some());
 }
 
-#[test]
-fn test_region_creation_with_long_string() {
-    // Test region creation with very long string doesn't panic
-    let long_region = "x".repeat(1000);
-    let region = Region::new(long_region.clone());
-    assert_eq!(region.as_ref(), long_region);
+#[cfg(feature = "ssm")]
+#[tokio::test]
+async fn test_ssm_service_creation_panic_safety() {
+    // Test that SSM service creation doesn't panic
+    let config = aws_config::defaults(aws_config::BehaviorVersion::latest())
+        .region("us-west-2")
+        .load()
+        .await;
+
+    let aws_client = AwsClient::with_config(config);
+    let _ssm_service = aws_client.ssm();
+    // Test that we can create the service without panicking
+    // Service creation is successful if we reach this point
+}
+
+#[cfg(feature = "sqs")]
+#[tokio::test]
+async fn test_sqs_service_creation_panic_safety() {
+    // Test that SQS service creation doesn't panic
+    let config = aws_config::defaults(aws_config::BehaviorVersion::latest())
+        .region("us-west-2")
+        .load()
+        .await;
+
+    let aws_client = AwsClient::with_config(config);
+    let _sqs_service = aws_client.sqs();
+    // Test that we can create the service without panicking
+    // Service creation is successful if we reach this point
+}
+
+#[cfg(feature = "s3")]
+#[tokio::test]
+async fn test_s3_service_creation_panic_safety() {
+    // Test that S3 service creation doesn't panic
+    let config = aws_config::defaults(aws_config::BehaviorVersion::latest())
+        .region("us-west-2")
+        .load()
+        .await;
+
+    let aws_client = AwsClient::with_config(config);
+    let _s3_service = aws_client.s3();
+    // Test that we can create the service without panicking
+    // Service creation is successful if we reach this point
 }

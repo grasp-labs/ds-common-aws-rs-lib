@@ -35,12 +35,14 @@
 //!     // Get specialized services (very fast, no network calls)
 //!     let ssm = aws.ssm();
 //!     let sqs = aws.sqs();
+//!     let s3 = aws.s3();
 //!
 //!     // Use services with shared client
 //!     let parameter = ssm.get_parameter("/myapp/database/url").await?;
 //!     let queue_url = sqs.get_queue("my-queue").await?;
 //!     sqs.send_message(&queue_url, "Hello, world!", None).await?;
 //!     ssm.put_parameter("/myapp/database/url", "my-database-url", ParameterType::String, true).await?;
+//!     s3.put_object("my-bucket", "my-key", b"test-value".to_vec(), None).await?;
 //!     Ok(())
 //! }
 //! ```
@@ -48,6 +50,8 @@
 pub mod client;
 pub mod error;
 
+#[cfg(feature = "s3")]
+pub mod s3;
 #[cfg(feature = "sqs")]
 pub mod sqs;
 #[cfg(feature = "ssm")]
@@ -55,6 +59,8 @@ pub mod ssm;
 
 // Re-export commonly used AWS types for convenience
 pub use aws_config;
+#[cfg(feature = "s3")]
+pub use aws_sdk_s3;
 #[cfg(feature = "sqs")]
 pub use aws_sdk_sqs;
 #[cfg(feature = "ssm")]

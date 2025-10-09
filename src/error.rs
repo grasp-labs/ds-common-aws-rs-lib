@@ -6,13 +6,15 @@
 //!
 //! ## Error Hierarchy
 //!
-//! - [`Error`]: Top-level error enum that unifies all module errors
 //! - [`SsmError`]: Errors from SSM operations
 //! - [`SqsError`]: Errors from SQS operations
+//! - [`S3Error`]: Errors from S3 operations
 //!
 
 use thiserror::Error;
 
+#[cfg(feature = "s3")]
+use crate::s3::error::S3Error;
 #[cfg(feature = "sqs")]
 use crate::sqs::error::SqsError;
 #[cfg(feature = "ssm")]
@@ -41,6 +43,11 @@ pub enum Error {
     #[cfg(feature = "sqs")]
     #[error(transparent)]
     Sqs(#[from] SqsError),
+
+    /// Errors from S3 operations
+    #[cfg(feature = "s3")]
+    #[error(transparent)]
+    S3(#[from] S3Error),
 }
 
 // endregion: --> Error

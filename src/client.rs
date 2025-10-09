@@ -71,4 +71,14 @@ impl AwsClient {
     pub fn ssm(&self) -> crate::ssm::SsmService {
         crate::ssm::SsmService::with_config(&self.config)
     }
+
+    /// Create an S3 service using the shared configuration
+    ///
+    /// # Returns
+    ///
+    /// Returns a new S3Service instance using the shared configuration.
+    #[cfg(feature = "s3")]
+    pub fn s3(&self) -> crate::s3::S3Service {
+        crate::s3::S3Service::with_config(&self.config)
+    }
 }
