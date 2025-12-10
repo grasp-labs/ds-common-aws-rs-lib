@@ -1,9 +1,10 @@
 # DS Common AWS Rust Library
 
+[![Rust](https://img.shields.io/badge/rust-1.76%2B-blue.svg)](https://www.rust-lang.org)
 [![Crates.io version](https://img.shields.io/crates/v/ds-common-aws-rs-lib.svg)](https://crates.io/crates/ds-common-aws-rs-lib)
 [![Documentation](https://docs.rs/ds-common-aws-rs-lib/badge.svg)](https://docs.rs/ds-common-aws-rs-lib)
-[![License: MIT OR Apache-2.0](https://img.shields.io/badge/License-MIT%20OR%20Apache--2.0-blue.svg)](https://opensource.org/licenses/MIT)
-[![Rust](https://img.shields.io/badge/rust-1.76%2B-blue.svg)](https://www.rust-lang.org)
+[![CI](https://github.com/grasp-labs/ds-common-aws-rs-lib/actions/workflows/ci.yaml/badge.svg)](https://github.com/grasp-labs/ds-common-aws-rs-lib/actions/workflows/ci.yaml)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A comprehensive Rust library for AWS services integration, providing high-level abstractions for AWS SDK operations with common utilities and error handling.
 
@@ -149,9 +150,6 @@ async fn example() -> Result<(), Error> {
 
 ## License
 
-This project is licensed under either of
+This project is licensed under
 
 - Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or <http://www.apache.org/licenses/LICENSE-2.0>)
-- MIT License ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
-
-at your option.
