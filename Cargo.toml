@@ -1,11 +1,11 @@
 [package]
 name = "ds-common-aws-rs-lib"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 rust-version = "1.76.0"
 description = "A comprehensive Rust library for AWS services integration, providing high-level abstractions for AWS SDK operations with common utilities and error handling"
 readme = "README.md"
-license = "MIT OR Apache-2.0"
+license = "Apache-2.0"
 repository = "https://github.com/grasp-labs/ds-common-aws-rs-lib"
 documentation = "https://docs.rs/ds-common-aws-rs-lib"
 keywords = ["aws", "sdk", "utilities", "ssm", "sqs"]
